@@ -1,0 +1,96 @@
+<?php
+    $cat = $view->getOption('cat');
+?>
+        <!-- Begin page content -->
+      <main role="main" class="container">
+        <h1 class="mt-5"><?php echo $cat->getName();?></h1>
+        <div class ='catInfos'>
+            <?php printCatDetail($cat); ?>
+        </div>
+      </main>
+      
+<?php
+    function printCatDetail($cat,$level = 1){
+        ?><ul><?php
+            if($cat->hasRessources()){
+            ?><li>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                Fichier
+                            </th>
+                            <th>
+                                Dernière mise à jour
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($cat->getRessources() as $ressource){
+                            printRessourceDetail($ressource);
+                         } ?>
+                    </tbody>
+                </table>
+            </li>
+        <?php
+            }
+            if($cat->hasChilds()){
+                $level++;
+            ?>
+            
+            <?php foreach ($cat->getChilds()->getElements() as $subCat){ ?>
+            <li>
+                  <h<?php echo $level; ?>><?php echo $subCat->getName(); ?></h<?php echo $level; ?>>
+                  <?php printCatDetail($subCat,$level); ?>
+            </li>
+            <?php } ?>
+            
+            <?php
+            }
+        ?></ul><?php
+        
+    }
+    
+    function printRessourceDetail(Core\models\FileModel $ressource){
+        if($ressource->getFollowedFiles()){
+            foreach($ressource->getFollowedFiles() as $file){
+                printRessourceDetail($file);
+            }
+        }else{    
+        ?>
+            <tr>
+                <td><?php echo $ressource->getName(); ?></td>
+                <td><?php echo date('d/m/Y H:i',$ressource->getLastUpdate()); ?></td>
+                <td><?php echo (($time = $ressource->hasIssue())?'<span class="livingError"><i class="fa fa-times"></i>&nbsp;'.date('d/m/Y H:i',$time).'</span>':'<i class="fa fa-check"></i>'); ?></td>
+                <td>
+                    <?php if(is_array($ressource->getIssues())){ ?>
+                    <a data-toggle="collapse" href="#detailRessource<?php echo $ressource->getId(); ?>" role="button" aria-expanded="false" aria-controls="detailRessource<?php echo $ressource->getId(); ?>">
+                        5 dernières erreurs
+                    </a>
+                    <?php } ?>
+                </td>
+            </tr>
+            <tr id="detailRessource<?php echo $ressource->getId(); ?>" class="collapse">
+                <td colspan="4">
+                    <?php if(is_array($ressource->getIssues())){foreach ($ressource->getIssues() as $issue){?>
+                    <p class="<?php echo ($issue->getEnd()==0)?'livingError':'';?>"><?php echo date('d/m/Y H:i',$issue->getStart());?> - <?php echo getElapse($issue->getStart(),$issue->getEnd());?> : <?php echo $issue->getDescription();?> - <?php echo ($issue->getEnd()==0)?'EN COURS':'TERMINE';?></p>
+                    <?php }}else{ ?>
+                    Pas d'erreur
+                   <?php } ?>
+                </td>
+            </tr>
+        <?php
+        }
+    }
+    
+    function getElapse($start,$end){
+        if($end==0)$end=time();
+        $seconds = $end-$start;
+        $dtF = new \DateTime('@0');
+        $dtT = new \DateTime("@$seconds");
+        return $dtF->diff($dtT)->format('%a jours, %h Heures, %i minutes');
+    }
+?>

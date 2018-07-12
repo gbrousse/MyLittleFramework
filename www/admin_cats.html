@@ -1,0 +1,91 @@
+<?php 
+    $currentCat = new Core\models\CategorieModel($view->services->db,$view->services->logger);
+    $currentCat->load($view->getOption('cat'));
+?>
+    <main role="main" class="container">
+        <h1 class="mt-5">Configuration des données</h1>
+        <div class="row">
+            <select id="categorie" class="custom-select-lg col-6">
+                <?php foreach ($view->getOption('categories')->getElements() as $cat) { 
+                    showCat($cat,'',$view);
+                } ?>
+            </select>
+            <a href="<?php echo $view->getServices()->router->getPath(array('admin','categories','add'),array('cat'=>$view->getOption('cat'))); ?>" title="ajouter un catégorie" class="col-1">
+                <i class="fa fa-plus"></i> 
+            </a>
+            <a href="<?php echo $view->getServices()->router->getPath(array('admin','categories','modify'),array('cat'=>$view->getOption('cat'))); ?>" title="modifier la catégorie" class="col-1">
+                <i class="fa fa-pencil"></i> 
+            </a>
+            <a href="<?php echo $view->getServices()->router->getPath(array('admin','categories','delete'),array('cat'=>$view->getOption('cat'))); ?>" title="supprimer la catégorie" class="col-1">
+                <i class="fa fa-trash-o"></i> 
+            </a>
+        </div>
+        <br/>
+        <table class="table table-hover">
+            <thead>
+                <th>id</th>
+                <th>Ressource</th>
+                <th>Fichiers suivis</th>
+                <th>Type</th>
+                <th>Dernière mise à jour</th>
+                <th>Options</th>
+            </thead>
+            <tbody>
+                <?php foreach ($currentCat->getRessources() as $ressource) { ?>
+				<tr>
+					<td>#<?php echo $ressource->getId(); ?></td>
+					<td><?php echo $ressource->getName(); ?></td>
+					<td>
+						<ul>
+						<?php 
+						if($ressource->getFollowedFiles()){
+							foreach ($ressource->getFollowedFiles() as $child) { 
+								
+						?>
+							<li><?php echo $child->getName(); ?></li>
+						<?php }} ?>
+						</ul>
+					</td>
+					<td><?php echo $ressource->getType(); ?></td>
+					<td><?php echo date('d/m/Y H:i',$ressource->getLastUpdate()); ?></td>
+					<td>
+					   
+						<a href="<?php echo $view->getServices()->router->getPath(array('admin','categories','category','filemodify'),array('cat'=>$view->getOption('cat'),'file'=>$ressource->getId())); ?>" title="modifier la catégorie" class="col-1">
+							<i class="fa fa-pencil"></i> 
+						</a>
+						<a href="<?php echo $view->getServices()->router->getPath(array('admin','categories','category','filedelete'),array('cat'=>$view->getOption('cat'),'file'=>$ressource->getId())); ?>" title="supprimer la catégorie" class="col-1">
+							<i class="fa fa-trash-o"></i> 
+						</a>
+					</td>
+				</tr>
+                <?php } ?>
+            </tbody>
+            <tfoot>
+                <th colspan="4"></th>
+                <th colspan="2">
+                    <a href="<?php echo $view->services->router->getPath(array('admin','categories','category','fileadd'),array('cat'=>$view->getOption('cat'))); ?>" title="ajouter un fichier">
+                        <i class="fa fa-plus"></i>&nbsp;Ajouter une ressource
+                    </a>
+                </th>
+            </tfoot>
+        </table>
+
+    </main>
+<?php
+function showCat ($cat, $title,$view){
+    $hasSub = false;
+    $title .= (($title=='')?'':' - ').$cat->getName();
+    if($childs = $cat->getChilds()){
+        if($childs instanceof \Core\models\CategoriesCollection)$hasSub = true;
+    }
+    ?>
+<option value="<?php echo $view->getServices()->router->getPath(array('admin','categories','category'),array('cat'=>$cat->getId())); ?>" <?php echo ($cat->getId() == $view->getOption('cat'))?'selected':'';?>><?php echo $title; ?></option>
+        <?php if($hasSub){ ?>
+            <?php foreach($childs->getElements() as $child){
+                showCat($child,$title,$view);
+            } ?>
+        <?php } ?>
+    </li>
+    <?php
+}
+?>

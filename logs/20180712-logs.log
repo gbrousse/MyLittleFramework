@@ -1,0 +1,21 @@
+[11:52] [alert] Core\Test\Test::test1 : alert test1
+C:\www\MyLittleFramework\test.php at l.67 : Core\Test\Test:test1
+[11:52] [error] Core\Test\Test::test12 : error test12
+C:\www\MyLittleFramework\src\Test\Test.php at l.20 : Core\Test\Test:test12
+C:\www\MyLittleFramework\test.php at l.67 : Core\Test\Test:test1
+[11:52] [error] Core\Test\Test::test12 : error test12
+C:\www\MyLittleFramework\test.php at l.68 : Core\Test\Test:test12
+[14:38] [alert] Core\Test\Test::test1 : alert test1
+C:\www\MyLittleFramework\test.php at l.67 : Core\Test\Test:test1
+[14:38] [error] Core\Test\Test::test12 : error test12
+C:\www\MyLittleFramework\src\Test\Test.php at l.20 : Core\Test\Test:test12
+C:\www\MyLittleFramework\test.php at l.67 : Core\Test\Test:test1
+[14:38] [error] Core\Test\Test::test12 : error test12
+C:\www\MyLittleFramework\test.php at l.68 : Core\Test\Test:test12
+[16:06] [alert] Core\Test\Test::test1 : alert test1
+C:\www\MyLittleFramework\test.php at l.67 : Core\Test\Test:test1
+[16:06] [error] Core\Test\Test::test12 : error test12
+C:\www\MyLittleFramework\src\Test\Test.php at l.20 : Core\Test\Test:test12
+C:\www\MyLittleFramework\test.php at l.67 : Core\Test\Test:test1
+[16:06] [error] Core\Test\Test::test12 : error test12
+C:\www\MyLittleFramework\test.php at l.68 : Core\Test\Test:test12

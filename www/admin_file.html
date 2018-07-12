@@ -1,0 +1,81 @@
+<?php 
+   $types = $view->getOption('engines')->getEngineTypes();
+   $ressource = $view->getOption('ressource');
+?>
+    <main role="main" class="container">
+        <h1 class="mt-5">Ressource</h1>
+        <p class="lastUpdate">Dernière mise à jour : <?php echo ($ressource->getLastUpdate()==0)?'jamais':date('d/m/Y H:i',$ressource->getLastUpdate());?></p>
+        <?php if(isset($view->options['formError'])){ ?>
+        <div class="alert alert-danger" role="alert">
+            <strong>Oups!</strong> <?php echo $view->options['formError']; ?>
+        </div>
+        <?php } ?>
+        <?php if(isset($view->options['formSuccess'])){ ?>
+        <div class="alert alert-success" role="alert">
+            Modifications enregistrées
+        </div>
+        <?php } ?>
+        <form method="post">
+            <input type="hidden" name="cat" value="<?php echo $view->getOption('cat'); ?>">
+            <div class="form-group row">
+                <label for="name" class="col-3 col-form-label">Nom</label>
+                <div class="col-9">
+                    <input type="name" class="form-control" name="name" id="name" placeholder="Nom" value="<?php echo $ressource->getName(); ?>"  required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="url" class="col-3 col-form-label">URL</label>
+                <div class="col-9">
+                    <input type="url" class="form-control" name="url" id="url" placeholder="url de la ressource" value="<?php echo $ressource->getUrl(); ?>"  required>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for="type" class="col-3 col-form-label">Type de suivi</label>
+                <div class="col-9">
+                    <select class="custom-select" id="enginetype" name="type">
+                        <?php foreach ($types as $type => $label) { ?>
+                        <option value="<?php echo $type; ?>" <?php echo ($type==$ressource->getType())?'selected':''; ?>><?php echo $label; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div> 
+            <br/>
+            <h3>Options</h3>
+            <?php  ?>
+            <hr/>
+            <?php 
+            foreach ($types as $type => $label) { 
+                $options = $view->getOption('engines')->getOptionsForEngine($type);
+                foreach ($options as $lbl => $conf) {
+                    switch ($conf['type']) {
+                        case 'bool':
+            ?>
+            <div class="form-group row engineoptions" data-engineType="<?php echo $type; ?>" >
+                <label for="<?php echo $type.'-'.$lbl; ?>" class="col-3 col-form-label"><?php echo $conf['label']; ?></label>
+                <div class="col-9">
+                    <input type="checkbox" class="form-control" name="options[<?php echo $type.']['.$lbl.']'; ?>" id="<?php echo $type.'-'.$lbl; ?>" placeholder="<?php echo $conf['label']; ?>" value="1" <?php echo ($ressource->getOption($lbl)==1)?'checked':''; ?>/>
+                </div>
+            </div>
+            <?php
+                            break;
+                        
+                        default:
+            ?>
+            <div class="form-group row engineoptions" data-engineType="<?php echo $type; ?>">
+                <label for="<?php echo $type.'-'.$lbl; ?>" class="col-3 col-form-label"><?php echo $conf['label']; ?></label>
+                <div class="col-9">
+                    <input type="text" class="form-control" name="options[<?php echo $type.']['.$lbl.']'; ?>" id="<?php echo $type.'-'.$lbl; ?>" placeholder="<?php echo $conf['label']; ?>" value="<?php echo $ressource->getOption($lbl); ?>" />
+                </div>
+            </div>
+            <?php
+                            break;
+                    }
+    
+                }
+            } ?>
+      
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+			<a class="btn btn-secondary" href="<?php echo $view->services->router->getPath(array('admin','categories','category'),array('cat'=>$view->getOption('cat')));?>">Retour</a>
+        </form>
+    </main>

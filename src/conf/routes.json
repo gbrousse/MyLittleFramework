@@ -1,0 +1,184 @@
+{
+    "login": {
+        "route":"\\/login",
+        "name":"Page de connexion",
+        "controller":"Login"
+    },
+    "crons":{
+        "route":"\\/cron",
+        "name":"Cron",
+        "controller":"Cron"
+    },
+    "admin": {
+        "route":"\\/admin",
+        "subroutes":{
+            "compte":{
+                "route":"\\/compte",
+                "options":{
+                    "user":"self",
+                    "action":"modify"
+                },
+                "name":"Compte utilisateur",
+                "controller":"AdminUser"
+            },
+            "conf":{
+                "route":"\\/options",
+                "name":"Options",
+                "controller":"AdminOptions"
+            },
+             "categories":{
+                "route":"\\/categories",
+                "name":"Catégories",
+                "subroutes":{
+                    "category":{
+                        "route":"\\/(?<cat>\\d+)",
+                        "name":"catégorie",
+                        "options":{
+                            "cat":"$1"
+                        },
+                        "subroutes":{
+                            "fileadd":{
+                                "route":"\\/file\\/add",
+                                "name":"Fichier - ajout",
+                                "controller":"AdminFile",
+                                "options":{
+                                    "action":"add"
+                                }
+                            },
+                            "filemodify":{
+                                "route":"\\/file\\/modify\\/(?<file>\\d+)",
+                                "name":"Fichier - modification",
+                                "controller":"AdminFile",
+                                "options":{
+                                    "action":"modify",
+                                    "file":"$1"
+                                }
+                            },
+                            "filedelete":{
+                                "route":"\\/file\\/delete\\/(?<file>\\d+)",
+                                "name":"Fichier - suppression",
+                                "controller":"AdminFile",
+                                "options":{
+                                    "action":"delete",
+                                    "file":"$1"
+                                }
+                            },
+                            "default":{
+                                "route":"",
+                                "name":"Catégorie",
+                                "controller":"AdminCategories"
+                            }
+                            
+                        }
+                        
+                        
+                    },
+                    "add":{
+                        "route":"\\/add",
+                        "name":"ajout",
+                        "controller":"AdminCategory",
+                        "options":{
+                            "action":"add"
+                        }
+                    },
+                    "modify":{
+                        "route":"\\/modify\\/(?<cat>\\d+)",
+                        "name":"modification",
+                        "controller":"AdminCategory",
+                        "options":{
+                            "action":"modify",
+                            "cat":"$1"
+                        }
+                    },
+                    "delete":{
+                        "route":"\\/delete\\/(?<cat>\\d+)",
+                        "name":"suppression",
+                        "controller":"AdminCategory",
+                        "options":{
+                            "action":"delete",
+                            "cat":"$1"
+                        }
+                    },
+                    
+                    "default":{
+                        "route":"",
+                        "name":"Gestion des Catégories",
+                        "controller":"AdminCategories"
+                    }
+                }
+                
+                
+            },
+            "users":{
+                "route":"\\/users",
+                "subroutes":{
+                    "add":{
+                        "route":"\\/add",
+                        "name":"Ajout",
+                        "controller":"AdminUser",
+                        "options":{
+                            "action":"add"
+                        }
+                    },
+                    "delete":{
+                        "route":"\\/delete\\/(?<user>\\d+)",
+                        "name":"[user]",
+                        "controller":"AdminUser",
+                        "options":{
+                            "action":"delete",
+                            "user":"$1"
+                        }
+                    },
+                    "modify":{
+                        "route":"\\/(?<user>\\d+)",
+                        "name":"[user]",
+                        "controller":"AdminUser",
+                        "options":{
+                            "action":"modify",
+                            "user":"$1"
+                        }
+                    },
+                    
+                    "default":{
+                        "route":"",
+                        "name":"Gestion des utilisateurs",
+                        "controller":"AdminUsers"
+                    }
+                }
+            },
+            "default":{
+                "route":"",
+                "name":"Administration",
+                "controller":"Admin"
+            }
+            
+        }
+    },
+    "category": {
+        "route":"\\/(?<cat>\\w+)-(?<catname>[[\\w][%\\w\\s]+)",
+        "options":{
+            "cat":"$1",
+            "catname":"$2"
+        },
+        "subroutes":{
+            "fileissues":{
+                "route":"\\/(?<file>\\d+)",
+                "name":"Détail",
+                "controller":"CatFiles",
+                "options":{
+                    "file":"$1"
+                }
+            },
+            "default":{
+                "route":"",
+                "name":"[catname]",
+                "controller":"Category"
+            }
+        }
+    },
+    "index":{
+        "route":"",
+        "name":"Index",
+        "controller":"index"
+    }
+}

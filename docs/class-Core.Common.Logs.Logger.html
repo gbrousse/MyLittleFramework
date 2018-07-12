@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class Core\Common\Logs\Logger | MyLittleFramework</title>
+
+	<link rel="stylesheet" href="resources/style.css?c2f33731c1948fbed7c333554678bfa68d4817da">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li>
+					<a href="namespace-Composer.html">
+						Composer<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Composer.Autoload.html">
+						Autoload					</a>
+
+						</li>
+							</ul></li>
+				<li class="active">
+					<a href="namespace-Core.html">
+						Core<span></span>
+					</a>
+
+						<ul>
+				<li class="active">
+					<a href="namespace-Core.Common.html">
+						Common<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Core.Common.Conf.html">
+						Conf					</a>
+
+						</li>
+				<li>
+					<a href="namespace-Core.Common.Container.html">
+						Container					</a>
+
+						</li>
+				<li>
+					<a href="namespace-Core.Common.db.html">
+						db					</a>
+
+						</li>
+				<li class="active">
+					<a href="namespace-Core.Common.Logs.html">
+						Logs<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Core.Common.Logs.handlers.html">
+						handlers					</a>
+
+						</li>
+							</ul></li>
+				<li>
+					<a href="namespace-Core.Common.Utils.html">
+						Utils					</a>
+
+						</li>
+							</ul></li>
+				<li>
+					<a href="namespace-Core.Controllers.html">
+						Controllers					</a>
+
+						</li>
+				<li>
+					<a href="namespace-Core.Models.html">
+						Models					</a>
+
+						</li>
+				<li>
+					<a href="namespace-Core.router.html">
+						router					</a>
+
+						</li>
+				<li>
+					<a href="namespace-Core.Test.html">
+						Test					</a>
+
+						</li>
+				<li>
+					<a href="namespace-Core.Views.html">
+						Views					</a>
+
+						</li>
+							</ul></li>
+				<li>
+					<a href="namespace-None.html">
+						None					</a>
+
+						</li>
+				<li>
+					<a href="namespace-PHP.html">
+						PHP					</a>
+
+						</li>
+				<li>
+					<a href="namespace-Psr.html">
+						Psr<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Psr.Container.html">
+						Container					</a>
+
+						</li>
+				<li>
+					<a href="namespace-Psr.Log.html">
+						Log<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Psr.Log.Test.html">
+						Test					</a>
+
+						</li>
+							</ul></li></ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-Core.Common.Logs.Logger.html">Logger</a></li>
+			</ul>
+
+
+			<h3>Traits</h3>
+			<ul>
+				<li><a href="class-Core.Common.Logs.LoggableTrait.html">LoggableTrait</a></li>
+				<li><a href="class-Core.Common.Logs.LoggerAwareTrait.html">LoggerAwareTrait</a></li>
+			</ul>
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Core.Common.Logs.html" title="Summary of Core\Common\Logs"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+				<li>
+					<a href="annotation-group-deprecated.html" title="List of elements with deprecated annotation">
+						<span>Deprecated</span>
+					</a>
+				</li>
+				<li>
+					<a href="annotation-group-todo.html" title="List of elements with todo annotation">
+						<span>Todo</span>
+					</a>
+				</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="-API-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+			</li>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Logger</h1>
+
+
+	<div class="description">
+	<p>Logger class</p>
+
+<p>Simple logger compliant with psr-3</p>
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Psr.Log.AbstractLogger.html"><span>Psr\Log\AbstractLogger</span></a>
+			
+			 implements 
+				<a href="class-Psr.Log.LoggerInterface.html"><span>Psr\Log\LoggerInterface</span></a>
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by">
+<b><span>Core\Common\Logs\Logger</span></b>			
+			
+			 uses 
+					<a href="class-Core.Common.Utils.Strings.html"><span>Core\Common\Utils\Strings</span></a>
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Core.html">Core</a>\<a href="namespace-Core.Common.html">Common</a>\<a href="namespace-Core.Common.Logs.html">Logs</a><br>
+		<b>Package:</b> MyLittleFramework\Core\Common\logs<br>
+
+				<b>Author:</b>
+				Grégory Brousse <a href="&#109;a&#x69;l&#x74;&#111;&#x3a;&#112;&#x72;&#111;&#x40;&#103;&#x72;&#101;&#x67;&#111;&#x72;&#121;&#x2d;&#98;&#x72;&#111;&#x75;&#115;&#x73;&#101;.&#x66;r">&#112;&#x72;&#111;&#x40;&#103;&#x72;&#101;&#x67;&#111;&#x72;&#121;&#x2d;&#98;&#x72;&#111;&#x75;&#115;&#x73;&#101;.&#x66;r</a><br>
+			<b>Located at</b> <a href="source-class-Core.Common.Logs.Logger.html#20-223" title="Go to source code">src/Common/Logs/Logger.php</a>
+		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Core.Common.Logs.Logger.html#72-84" title="Go to source code">__construct</a>( <span>string <var>$minLevel</var> = Core\Common\Logs\LogLevel::DEBUG</span>, <span>string <var>$backtraceLevel</var> = Core\Common\Logs\LogLevel::EMERGENCY</span> )</code>
+
+		<div class="description short">
+			<p>Constructor</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Constructor</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$minLevel</var></dt>
+					<dd>logging minimum level</dd>
+					<dt><var>$backtraceLevel</var></dt>
+					<dd>Minimum level from which to add backtrace to log</dd>
+				</dl></div>
+
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><a href="class-Psr.Log.LogLevel.html">Psr\Log\LogLevel</a></code><br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="attachHandler" id="_attachHandler">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_attachHandler">#</a>
+		<code><a href="source-class-Core.Common.Logs.Logger.html#86-101" title="Go to source code">attachHandler</a>( <span><code><a href="class-Core.Common.Logs.handlers.HandlerInterface.html">Core\Common\Logs\handlers\HandlerInterface</a></code> <var>$handler</var></span>, <span>string <var>$name</var></span>, <span>string <var>$minLevel</var> = Core\Common\Logs\LogLevel::WARNING</span>, <span>string <var>$dedicateToLevel</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			<p>attach an handler to logger</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>attach an handler to logger</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$handler</var></dt>
+					<dd>log handler instance</dd>
+					<dt><var>$name</var></dt>
+					<dd>name to identify the handler</dd>
+					<dt><var>$minLevel</var></dt>
+					<dd>logging min level for the handler</dd>
+					<dt><var>$dedicateToLevel</var></dt>
+					<dd>dedicate the handler to this level</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="detachHandler" id="_detachHandler">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_detachHandler">#</a>
+		<code><a href="source-class-Core.Common.Logs.Logger.html#102-113" title="Go to source code">detachHandler</a>( <span>string <var>$name</var></span> )</code>
+
+		<div class="description short">
+			<p>detach an handler from logger</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>detach an handler from logger</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd>name to identify the handler</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean<br>return true if handler have been detached, false if not.
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="hasHandler" id="_hasHandler">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_hasHandler">#</a>
+		<code><a href="source-class-Core.Common.Logs.Logger.html#115-122" title="Go to source code">hasHandler</a>( <span>string <var>$name</var></span> )</code>
+
+		<div class="description short">
+			<p>test if handler is attached</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>test if handler is attached</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd>name to identify the handler</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean<br>return true if handler is attached, false if not.
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="runHandler" id="_runHandler">
+
+		<td class="attributes"><code>
+			 private 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_runHandler">#</a>
+		<code><a href="source-class-Core.Common.Logs.Logger.html#124-141" title="Go to source code">runHandler</a>( <span>string <var>$level</var></span>, <span>string <var>$formattedMessage</var></span>, <span>array <var>$formattedBacktrace</var></span> )</code>
+
+		<div class="description short">
+			<p>execute the handlers with log infos</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>execute the handlers with log infos</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$level</var></dt>
+					<dd>level of the log</dd>
+					<dt><var>$formattedMessage</var></dt>
+					<dd>log text</dd>
+					<dt><var>$formattedBacktrace</var></dt>
+					<dd>backtrace or false</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getHandler" id="_getHandler">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getHandler">#</a>
+		<code><a href="source-class-Core.Common.Logs.Logger.html#148-150" title="Go to source code">getHandler</a>( <span> <var>$name</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__get" id="___get">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___get">#</a>
+		<code><a href="source-class-Core.Common.Logs.Logger.html#157-159" title="Go to source code">__get</a>( <span> <var>$name</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="log" id="_log">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_log">#</a>
+		<code><a href="source-class-Core.Common.Logs.Logger.html#162-193" title="Go to source code">log</a>( <span>string <var>$level</var></span>, <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			<p>Handle logs</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Handle logs</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$level</var></dt>
+					<dd>log level</dd>
+					<dt><var>$message</var></dt>
+					<dd>log text</dd>
+					<dt><var>$context</var></dt>
+					<dd>log context</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getBackTrace" id="_getBackTrace">
+
+		<td class="attributes"><code>
+			 private 
+
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getBackTrace">#</a>
+		<code><a href="source-class-Core.Common.Logs.Logger.html#195-208" title="Go to source code">getBackTrace</a>( )</code>
+
+		<div class="description short">
+			<p>recover bactrace</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>recover bactrace</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					array<br>backtrace
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="formatBacktrace" id="_formatBacktrace">
+
+		<td class="attributes"><code>
+			 private 
+
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_formatBacktrace">#</a>
+		<code><a href="source-class-Core.Common.Logs.Logger.html#210-221" title="Go to source code">formatBacktrace</a>( <span> <var>$backtrace</var></span> )</code>
+
+		<div class="description short">
+			<p>format the bactrace</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>format the bactrace</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					array<br>formatted backtrace
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Psr.Log.AbstractLogger.html#methods">Psr\Log\AbstractLogger</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Psr.Log.AbstractLogger.html#_alert">alert()</a>, 
+			<a href="class-Psr.Log.AbstractLogger.html#_critical">critical()</a>, 
+			<a href="class-Psr.Log.AbstractLogger.html#_debug">debug()</a>, 
+			<a href="class-Psr.Log.AbstractLogger.html#_emergency">emergency()</a>, 
+			<a href="class-Psr.Log.AbstractLogger.html#_error">error()</a>, 
+			<a href="class-Psr.Log.AbstractLogger.html#_info">info()</a>, 
+			<a href="class-Psr.Log.AbstractLogger.html#_notice">notice()</a>, 
+			<a href="class-Psr.Log.AbstractLogger.html#_warning">warning()</a>
+		</code></td>
+	</tr>
+	</table>
+
+	<table class="summary used">
+	<caption>Methods used from <a href="class-Core.Common.Utils.Strings.html#methods">Core\Common\Utils\Strings</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Core.Common.Utils.Strings.html#_encrypt">encrypt()</a>, 
+			<a href="class-Core.Common.Utils.Strings.html#_replaceInString">replaceInString()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+	<table class="summary properties" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="logLevel" id="$logLevel">
+		<td class="attributes"><code>
+			private  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Core.Common.Logs.Logger.html#34-40" title="Go to source code"><var>$logLevel</var></a>
+
+			<div class="description short">
+				<p>Min level to log</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Min level to log</p>
+
+					<h4>See</h4>
+					<div class="list">
+							<code><a href="class-Psr.Log.LogLevel.html">Psr\Log\LogLevel</a></code><br>
+					</div>
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$logLevel" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="backtraceLevel" id="$backtraceLevel">
+		<td class="attributes"><code>
+			private  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Core.Common.Logs.Logger.html#42-48" title="Go to source code"><var>$backtraceLevel</var></a>
+
+			<div class="description short">
+				<p>Minimum level from which to add backtrace to log</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Minimum level from which to add backtrace to log</p>
+
+					<h4>See</h4>
+					<div class="list">
+							<code><a href="class-Psr.Log.LogLevel.html">Psr\Log\LogLevel</a></code><br>
+					</div>
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$backtraceLevel" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="handlers" id="$handlers">
+		<td class="attributes"><code>
+			private  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Core.Common.Logs.Logger.html#50-55" title="Go to source code"><var>$handlers</var></a>
+
+			<div class="description short">
+				<p>list of the logs handlers</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>list of the logs handlers</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$handlers" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="logLevels" id="$logLevels">
+		<td class="attributes"><code>
+			private  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Core.Common.Logs.Logger.html#57-70" title="Go to source code"><var>$logLevels</var></a>
+
+			<div class="description short">
+				<p>Log Levels for comparison</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Log Levels for comparison</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$logLevels" class="anchor">#</a>
+				<code><span class="php-keyword1">array</span>(
+    LogLevel::EMERGENCY =&gt; <span class="php-num">7</span>,
+    LogLevel::ALERT     =&gt; <span class="php-num">6</span>,
+    LogLevel::CRITICAL  =&gt; <span class="php-num">5</span>,
+    LogLevel::ERROR     =&gt; <span class="php-num">4</span>,
+    LogLevel::WARNING   =&gt; <span class="php-num">3</span>,
+    LogLevel::NOTICE    =&gt; <span class="php-num">2</span>,
+    LogLevel::INFO      =&gt; <span class="php-num">1</span>,
+    LogLevel::DEBUG     =&gt; <span class="php-num">0</span>
+)</code>
+			</div>
+		</td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		MyLittleFramework API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>
