@@ -19,15 +19,16 @@
 
 namespace Core\Controllers;
 use \Psr\Container\ContainerInterface;
-
+use \Core\Common\Logs\LoggerAwareTrait;
+use \Core\Common\Utils\Navigation;
 /**
  * Description of ControllerAbstract
  *
  * @author gregory
  */
 class Controller implements ControllerInterface{
-    use \Core\Common\Logs\Loggable;
-    use \Core\Common\Utils\Navigation;
+    use LoggerAwareTrait;
+    use Navigation;
   
     protected $services;
     
@@ -36,14 +37,14 @@ class Controller implements ControllerInterface{
         
         if($this->services->logger){
             $this->setLogger($this->services->logger);
-            $this->_logger->debug('Logger attached',array(__METHOD__));
+            $this->logger->debug('Logger attached',array(__METHOD__));
         }
         $this->run($options);
     }
     
     
     protected function loadView($options,$loadCats = true,$showHeader = true, $showFooter = true){
-        $this->logDebug('init with options : '.  print_r($options,true));
+        $this->logger->debug('init with options : '.  print_r($options,true));
         $view = new \Core\Views\View($this->services);
         
         
@@ -51,7 +52,7 @@ class Controller implements ControllerInterface{
             $categories = new \Core\Models\CategoriesCollection($this->services->db,$this->services->logger);
             $categories->load();
             $options['categories']=$categories;
-            $this->logDebug('categories loaded ');
+            $this->logger->debug('categories loaded ');
         }
         $options['showHeader']=$showHeader;
         $options['showFooter']=$showFooter;

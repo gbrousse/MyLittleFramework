@@ -18,6 +18,7 @@
  */
 
 namespace Core\Models;
+use \Core\Common\Logs\LoggerAwareTrait;
 use \Exception;
 
 /**
@@ -26,7 +27,7 @@ use \Exception;
  * @author gregory
  */
 abstract class Collection implements CollectionInterface {
-    use \Core\Common\Logs\Loggable;
+    use LoggerAwareTrait;
     
     protected $db = null;
     protected $collection = array();
@@ -34,10 +35,10 @@ abstract class Collection implements CollectionInterface {
     public function __construct($db=null,$logger=null) {
         if($logger){
             $this->setLogger($logger);
-            $this->logDebug('Logger attached');
+            $this->logger->debug('Logger attached');
         }
         if(!$db){
-            $this->logError('No DB');
+            $this->logger->error('No DB');
             throw new Exception(__CLASS__.' : No DB');
         }
         $this->db = $db;
@@ -49,9 +50,9 @@ abstract class Collection implements CollectionInterface {
     
     public function delete($id = null) {
         if(is_null($id)){
-            foreach ($this->collection as &$cat) {
-                $cat->delete();
-                unset($cat);
+            foreach ($this->collection as &$col) {
+                $col->delete();
+                unset($col);
             }
         }else{
             if(isset($this->collection[$id])){
@@ -86,5 +87,4 @@ abstract class Collection implements CollectionInterface {
         return $this->collection;
     }
 
-//put your code here
 }

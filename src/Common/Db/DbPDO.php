@@ -31,17 +31,21 @@ class DbPDO extends PDO{
     use LoggerAwareTrait;
     
     public function __construct($params,$logger=null) {
+        if($logger){
+            $this->setLogger($logger);
+            $this->logger->debug('Logger attached');
+        }
         if(!isset($params->host) || !isset($params->name) || !isset($params->login) || !isset($params->pass) ){
-            $this->logger->error('Connection to DB error',array(__METHOD__));
+            $this->logger->error('Connection to DB error' );
         }
         $dsn = 'mysql:dbname='.$params->name.';host='.$params->host;
         parent::__construct($dsn,$params->login,$params->pass);
         try{ 
             $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
         }catch (PDOException $e){
-            $this->logger->error('PDO error : '.$e->getMessage(),array(__METHOD__));
+            $this->logger->error('PDO error : '.$e->getMessage() );
             return;
         }
-        $this->logger->debug('Connection to DB',array(__METHOD__));   
+        $this->logger->debug('Connection to DB' );   
     }   
 }

@@ -19,24 +19,27 @@
 
 namespace Core\Models;
 
+use \Core\Common\Logs\LoggerAwareTrait;
+use \Exception;
+
 /**
  * Description of model
  *
  * @author gregory
  */
 abstract class Model implements ModelInterface{
-    use \Core\Common\Logs\Loggable;
+    use LoggerAwareTrait;
     
     protected $db = null;
     
     public function __construct($db=null,$logger=null) {
         if($logger){
             $this->setLogger($logger);
-            $this->logDebug('Logger attached');
+            $this->logger->debug('Logger attached');
         }
         if(!$db){
-            $this->logError('No DB');
-            throw new \Exception(__CLASS__.' : No DB');
+            $this->logger->error('No DB');
+            throw new Exception(__CLASS__.' : No DB');
         }
         $this->db = $db;
     }

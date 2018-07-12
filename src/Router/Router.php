@@ -18,15 +18,14 @@
  */
 namespace Core\router;
 
-use \Core\Common\Logs\Loggable;
+use \Core\Common\Logs\LoggerAwareTrait;
 /**
  * Description of router
  *
  * @author gregory
  */
 class Router {
-    use Loggable;
-    //put your code here
+    use LoggerAwareTrait;
     protected $routes;
     protected $base;
     protected $breadcrumb;
@@ -34,27 +33,27 @@ class Router {
     public function __construct($params,$logger=null) {
         if($logger){
             $this->setLogger($logger);
-            $this->_logger->debug('Logger attached',array(__METHOD__));
+            $this->logger->debug('Logger attached');
         }
         
         $this->base = $params->base;
         
         if(!file_exists($params->path)){
-            if($this->_logger)$this->_logger->error('Routes file doesn\'t exists',array(__METHOD__));
+             $this->logger->error('Routes file doesn\'t exists' );
             throw new Exception ('routes file not found');
         }
         
         if($this->routes = json_decode(file_get_contents($params->path))){
-            if($this->_logger)$this->_logger->debug('Routes loaded',array(__METHOD__));
+             $this->logger->debug('Routes loaded' );
         }else{
-            if($this->_logger)$this->_logger->error('Routes can\'t be loaded',array(__METHOD__));
+             $this->logger->error('Routes can\'t be loaded' );
             throw new Exception ('routes not loaded');
         }
     }
     
     public function getController ($path=null){
         if(!$path)$path = str_replace($this->base,'',$_SERVER['REQUEST_URI']);
-        if($this->_logger)$this->_logger->debug('Path : '.$path,array(__METHOD__));
+         $this->logger->debug('Path : '.$path );
   
         return $this->HandlePath(urldecode($path));
     }
@@ -68,9 +67,9 @@ class Router {
         }
         foreach($routes as $route => $infos){
             if(preg_match('/'.$infos->route.'/', $path, $matches)){
-                $this->logDebug('Route found : '.$route.' ('.$path.' - '.$infos->route.')'); 
+                $this->logger->debug('Route found : '.$route.' ('.$path.' - '.$infos->route.')'); 
                 $nextPath = preg_replace('/'.preg_quote($matches[0], '/').'/', '', $path, 1);
-                $this->logDebug('Next path : '.$nextPath);
+                $this->logger->debug('Next path : '.$nextPath);
                 if(isset($infos->options)){
                     foreach($infos->options as $optionLabel => $optionValue){
                         if(preg_match('/\$(\d*)/', $optionValue,$optionCell)){
@@ -80,23 +79,23 @@ class Router {
                            
                             $options[$optionLabel]=$optionValue;
                         }
-                        $this->logDebug('New option : '.$optionLabel.' = '.$options[$optionLabel]);
+                        $this->logger->debug('New option : '.$optionLabel.' = '.$options[$optionLabel]);
                     }  
                 }
                 
                 $this->addRouteToBreadcrumb($infos, $route, $options);
                 if(isset($infos->subroutes)){
-                    $this->logDebug('Sub routes found ');
+                    $this->logger->debug('Sub routes found ');
                     return $this->handlePath($nextPath, $infos->subroutes, $options);
                 }
                 if(isset($infos->controller)){
-                    $this->logDebug('Controller : '.$infos->controller);
+                    $this->logger->debug('Controller : '.$infos->controller);
                     return array(
                         'controller'=>$infos->controller,
                         'options'=>$options
                     );
                 }else{
-                    $this->logError('No controller found for path : '.$path);
+                    $this->logger->error('No controller found for path : '.$path);
                     return false;
                 }
             }
@@ -111,22 +110,22 @@ class Router {
             $route = array($route);
         }
         foreach($route as $routePart){
-            $this->logDebug('Handle sub route : '.$routePart);
+            $this->logger->debug('Handle sub route : '.$routePart);
             if(isset($currentRoute->$routePart))$currentRoute = $currentRoute->$routePart;
             elseif(isset($currentRoute->subroutes->$routePart))$currentRoute = $currentRoute->subroutes->$routePart;
             else {
-                $this->logError($routePart.' not found in '.  print_r($currentRoute,true));
+                $this->logger->error($routePart.' not found in '.  print_r($currentRoute,true));
                 continue;
             }
             $path .= $currentRoute->route;
-            $this->logDebug('New path :'.$path);
+            $this->logger->debug('New path :'.$path);
             if(isset($currentRoute->options)){
                
                 
                 foreach($currentRoute->options as $optionLabel => $optionValue){
                     if(preg_match('/\$(\d*)/', $optionValue,$optionCell)){
                         if(!isset($options[$optionLabel])){
-                            $this->logError('Parameter :'.$optionLabel.'not found');
+                            $this->logger->error('Parameter :'.$optionLabel.'not found');
                             continue;
                         }
                     }
@@ -138,18 +137,18 @@ class Router {
                                     return $options[$m[2]]; 
                               },
                               $path);
-        $this->logDebug('Final path :'.$path);
+        $this->logger->debug('Final path :'.$path);
         return $this->base.str_replace('\\', '', $path);
     }
     private function addIndextoBreadcrumb(){
-        $this->logDebug('adding index to breadcrumb');
+        $this->logger->debug('adding index to breadcrumb');
         $name = $this->routes->index->name;
         $path = $this->getPath(array('index'), array());
         $this->breadcrumb['links'][]=array('name'=>$name,'path'=>$path);
     }
     
     private function addRouteToBreadcrumb($route,$routeId,$options){
-        $this->logDebug('adding '.$routeId.' to breadcrumb');
+        $this->logger->debug('adding '.$routeId.' to breadcrumb');
         if($routeId == 'default')return;
         if(isset($route->name)){
             $name = $route->name;
@@ -174,7 +173,7 @@ class Router {
         }
         $path = $this->getPath($this->breadcrumb['historic'], $this->breadcrumb['options']);
         $this->breadcrumb['links'][]=array('name'=>$name,'path'=>$path);
-        $this->logDebug(print_r($this->breadcrumb,true));
+        $this->logger->debug(print_r($this->breadcrumb,true));
     }
     
     public function getBreadCrumb(){

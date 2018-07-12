@@ -30,7 +30,5 @@ Interface CollectionInterface {
     public function add($element);
     public function delete($id);
     public function save();
-    public function getElement($id);
-    
-    
+    public function getElement($id);   
 }
