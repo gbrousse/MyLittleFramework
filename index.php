@@ -36,7 +36,6 @@ $router = new router($config->routes,$logger);
 $appServices->add('config', $config);
 $appServices->add('logger', $logger);
 $appServices->add('db', $db);
-$appServices->add('user', $user);
 $appServices->add('router', $router);
 
 
